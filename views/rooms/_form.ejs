@@ -1,0 +1,31 @@
+<form action="<%= (typeof actionPath === 'undefined') ? '/rooms' : actionPath %>", method="POST">
+    <% if (typeof actionPath !== 'undefined') { %>
+      <input type="hidden" name="id" value="<%= formData.id %>">
+    <% } %>
+  
+    <div class="form-group">
+      <label for="classification">Class</label>
+      <select name="classification" class="form-control">
+        <option value="DELUXED">Deluxed</option>
+        <option value="SUIT">Suit</option>
+        <option <%= formData.classification && formData.classification === 'PRESIDENTIAL' ? 'selected' : null %> value="PRESIDENTIAL">Presidential</option>
+      </select>
+    </div>
+    <div class="form-group">
+        <label for="roomNumber">Room No.</label>
+        <input type="text" name="roomNo" class="form-control" value="<%= formData.roomNo %>">
+      </div> 
+    <div class="form-group">
+      <label for="description">Details</label>
+      <textarea name="description" class="form-control summernote">
+        <%= formData.description %>
+      </textarea>
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="text" name="price" class="form-control" value="<%= formData.price %>">
+      </div> 
+    <div class="form-group">
+      <button class="btn btn-dark">Submit</button>
+    </div>
+  </form>

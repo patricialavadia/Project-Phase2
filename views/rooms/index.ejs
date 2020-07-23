@@ -1,0 +1,37 @@
+<%- include ('../partials/header') %>
+<div class="container my-5">
+    <header>
+        <br>
+        <h1 class="h1">Our Rooms</h1>
+    </header>
+    <div class="row">
+        <% for (let roomDetails of room) { %>
+        <div class="card ml-3" style="width: 14rem;">
+            <div class="card-body bg-light">
+                <h5 class="card-title">Room: <%=  roomDetails.roomNo %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><%=  roomDetails.classification %></h6>
+                <small class="float-right">$ <%=  roomDetails.price %> / day</small><br>
+                <hr>
+                <a class="btn btn-success" href="/rooms/<%= roomDetails.id %>/bookRooms"> <i class="fa fa-bed" aria-hidden="true"></i> Book</a>
+                <a class="btn btn-primary" href="/rooms/<%= roomDetails.id %>"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
+            </div>
+            <hr>
+            <small class="text-muted">
+              <div class="float-right">
+                <form action="/rooms/delete" method="post" onsubmit="return confirm('Are you sure you want to delete all your hard work?');">
+                  <input type="hidden" value="<%= roomDetails.id %>" name="id">
+                  <% if (authorized && (typeof roomDetails.user === 'undefined' || roomDetails.user.email === email)) { %>
+                  <a class="btn" href="/rooms/<%= roomDetails.id %>/edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <button class="btn" type="submit"><i class="fa fa-trash"></i></button>
+                  <% }%>
+              </form>
+              </div>
+                ~ <%= roomDetails.user.fullname %>
+            </small>
+          
+        </div>
+        <% } %>
+    </div>
+</div>
+
+<%- include ('../partials/footer') %>

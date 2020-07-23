@@ -1,0 +1,25 @@
+<%- include ('../partials/header') %>
+<div class="container my-5">
+    <br>
+      <div class="card text-center">
+        <div class="card-header">
+            <%= room.classification %> 
+        </div>
+        <div class="card-body">
+            <p class="float-right">
+                Room <%= room.roomNo %> <br>
+                Price $ <%= room.price %>
+             </p>
+          <h5 class="card-title display-4"><%- room.classification %> </h5>
+          <br><hr>
+          <p class="card-text"><%= room.description %> </p>
+          <a href="/rooms" class="btn btn-secondary"> <i class="fa fa-h-square" aria-hidden="true"></i> Home</a>
+          <a  class="btn btn-primary" href="/rooms/<%= room.id %>/bookRooms"> <i class="fa fa-bed" aria-hidden="true"></i> Book</a>
+        </div>
+        <div class="card-footer text-muted">
+            <%= room.createdAt %>
+        </div>
+      </div>
+</div>
+
+<%- include ('../partials/footer') %>

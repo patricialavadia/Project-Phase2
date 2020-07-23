@@ -1,0 +1,42 @@
+<%- include ('../partials/header') %>
+<div class="container my-5">
+    <header>
+        <br>
+        <h1 class="h1">Reservations</h1>
+      </header> 
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Room</th>
+            <th scope="col">Check-in</th>
+            <th scope="col">Check-out</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Guest</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let bookings of booking) { %>
+          <tr>
+            <td><%= bookings.roomNo %></td>
+            <td><%= bookings.dateFrom %></td>
+            <td><%= bookings.dateTo %></td>
+            <td><%= bookings.firstName %> <%= bookings.lastName %></td>
+            <td><%= bookings.numberOfGuest %></td>  
+          
+                <form class="form-inline" action="/bookings/delete" method="post" onsubmit="return confirm('Are you sure you want to delete all your hard work?');">
+                    <input type="hidden" value="<%= bookings.id %>" name="id">
+                    <td>
+                        <a class="btn btn-primary" href="/bookings/<%= bookings.id %>">Show</a>
+                        <a class="btn btn-primary" href="/bookings/<%= bookings.id %>/edit">Update</a>
+                        <button class="btn btn-primary" type="submit"> Delete </button>
+                    </td>    
+                </form>   
+       
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+</div>
+
+<%- include ('../partials/footer') %>

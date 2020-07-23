@@ -1,0 +1,64 @@
+<%- include ('../partials/header') %>
+<div class="container my-5">
+    <br>
+      <div class="card text-center">
+        <div class="card-header">
+            Reservation Details
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Room</th>
+                        <th scope="col">Room-Type</th>
+                        <th scope="col">Check-in</th>
+                        <th scope="col">Check-out</th>
+                        <th scope="col">Guest</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <td><%= booking.roomNo %></td>
+                        <td><%= booking.classification %></td>
+                        <td><%= booking.dateFrom %></td>
+                        <td><%= booking.dateTo %></td>
+                        <td><%= booking.numberOfGuest%></td>
+                        <td>$ <%= booking.price %></td>
+                    </tbody>
+                </table>
+            </div> 
+        </div>
+        <div class="card-header">
+            Customer Information
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <td><%= booking.firstName %></td>
+                        <td><%= booking.lastName %></td>
+                        <td><%= booking.address %></td>
+                        <td><%= booking.phone %></td>
+                        <td><%= booking.email%></td>
+                    </tbody>
+                </table>
+            </div> 
+          <a href="/bookings" class="btn btn-secondary"> <i class="fa fa-h-square" aria-hidden="true"></i> Reservations</a>
+        </div>
+        <div class="card-footer text-muted">
+            <%= booking.createdAt %>
+        </div>
+      </div>
+</div>
+
+<%- include ('../partials/footer') %>
