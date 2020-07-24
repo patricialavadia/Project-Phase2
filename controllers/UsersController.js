@@ -11,13 +11,14 @@ exports.create = async (req, res) => {
   try {
     const user = new User(req.body);
     await User.register(user, req.body.password);
-    req.flash('success', `Welcome, ${user.fullname}. Thank you for registering.`);
-    res.redirect(`/login`);
+    //req.flash('success', `Welcome, ${user.fullname}. Thank you for registering.`);
+    //res.redirect(`/login`);
+    res.status(200).json(user);
   } catch (error) {
-    console.log('Errors');
-    req.flash('danger', error.message);
+    //req.flash('danger', error.message);
 
-    req.session.formData = req.body;
-    res.redirect(`/register`);
+    //req.session.formData = req.body;
+    //res.redirect(`/register`);
+    res.status(400).json({message: "An error occured while creating an account."});
   }
 };

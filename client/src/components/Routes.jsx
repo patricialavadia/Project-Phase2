@@ -13,6 +13,7 @@ import BookRooms from './rooms/BookRooms';
 import Reservation from './bookings/Index';
 import ShowReservation from './bookings/Show';
 import EditReservation from './bookings/Edit';
+import Register from './users/New';
 
 function Routes ({user, setUser}) {
   return (
@@ -30,7 +31,7 @@ function Routes ({user, setUser}) {
         />
       }/>
       <Route exact path="/" component={Home}/>
-
+      <Route exact path="/users/new" component={Register}/>
       {user ? (
         <Fragment>
             <Route exact path="/rooms" render={

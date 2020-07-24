@@ -61,9 +61,9 @@ exports.delete = async (req, res) => {
   try {
     await Booking.deleteOne({_id: req.body.id});
     req.flash('success', 'The room was deleted successfully');
-    res.redirect(`/booking`);
+    res.redirect(`/api/bookings`);
   } catch (error) {
     req.flash('danger', `There was an error deleting this room: ${error}`);
-    res.redirect(`/bookings`);
+    res.redirect(`/api/bookings`);
   }
 };

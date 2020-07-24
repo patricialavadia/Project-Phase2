@@ -106,12 +106,12 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    console.log(req.body);
+
     await Room.deleteOne({_id: req.body.id});
     req.flash('success', 'The room was deleted successfully');
-    res.redirect(`/rooms`);
+    res.redirect(`/api/rooms`);
   } catch (error) {
     req.flash('danger', `There was an error deleting this room: ${error}`);
-    res.redirect(`/room`);
+    res.redirect(`/api/room`);
   }
 };
