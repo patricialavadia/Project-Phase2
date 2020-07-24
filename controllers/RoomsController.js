@@ -5,43 +5,38 @@ const User = require('../models/User');
 
 exports.bookCustomers  = async (req, res) => {
   try {
-    const booking = await Booking.create(req.body);
-    req.flash('success', 'Customer Booked successfully');
-    res.redirect(`/rooms`);
+    const { user: email } = req.session.passport;
+    const user = await User.findOne({email: email});
+    
+    const booking = await Booking.create({user: user._id, ...req.body});
+
+    res.status(200).json(booking);
   } catch (error) {
-    req.flash('danger', `There was an error booking this customer: ${error}`);
-    req.session.formData = req.body;
-    res.redirect('/rooms/bookRooms');
+    console.log("error: " + error)
+    res.status(400).json({message: "There was an error creating the room post", error});
   }
 };
 exports.index = async (req, res) => {
   try {
-    const room = await Room
+    const rooms = await Room
       .find()
       .populate('user')
-      .sort({roomNo: 'asc'});
+      .sort({updatedAt: 'desc'});
 
-    res.render(`${viewPath}/index`, {
-      pageTitle: 'Rooms',
-      room: room
-    });
+    res.status(200).json(rooms);
   } catch (error) {
-    req.flash('danger', `There was an error displaying the Room: ${error}`);
-    res.redirect('/');
+    res.status(400).json({message: 'There was an error fetching the Rooms', error});
   }
 };
 
 exports.show = async (req, res) => {
   try {
     const room = await Room.findById(req.params.id)
-    .populate('user')
-    res.render(`${viewPath}/show`, {
-      pageTitle: room.title,
-      room: room
-    });
+      .populate('user');
+    
+    res.status(200).json(room);
   } catch (error) {
-    req.flash('danger', `There was an error displaying this room: ${error}`);
-    res.redirect('/');
+    res.status(400).json({message: "There was an error fetching the blog"});
   }
 };
 
@@ -53,16 +48,14 @@ exports.new = (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-
     const { user: email } = req.session.passport;
     const user = await User.findOne({email: email});
-
+    
     const room = await Room.create({user: user._id, ...req.body});
-    req.flash('success', 'Room added successfully');
-    res.redirect(`/rooms/${room.id}`);
+
+    res.status(200).json(room);
   } catch (error) {
-    req.flash('danger', `There was an error adding this room: ${error}`);
-    req.session.formData = req.body;
+    res.status(400).json({message: "There was an error creating the room post", error});
   }
 };
 
@@ -93,23 +86,21 @@ exports.bookRooms = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-
-
     const { user: email } = req.session.passport;
     const user = await User.findOne({email: email});
 
     let room = await Room.findById(req.body.id);
-    if (!room) throw new Error('Blog could not be found');
+    if (!room) throw new Error('Room not be found');
 
     const attributes = {user: user._id, ...req.body};
     await Room.validate(attributes);
     await Room.findByIdAndUpdate(attributes.id, attributes);
 
-    req.flash('success', 'The Room was updated successfully');
-    res.redirect(`/rooms/${req.body.id}`);
+    req.flash('success', 'The room was updated successfully');
+    res.redirect(`/api/rooms/${req.body.id}`);
   } catch (error) {
     req.flash('danger', `There was an error updating this room: ${error}`);
-    res.redirect(`/rooms/${req.body.id}/edit`);
+    res.redirect(`/api/rooms/${req.body.id}/edit`);
   }
 };
 

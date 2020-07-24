@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 
 function Nav ({user}) {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <Link to="/" className="navbar-brand">Hotel Bookings</Link>
 
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,15 +19,15 @@ function Nav ({user}) {
           {user ? (
             <Fragment>
                 <li className="nav-item">
-                  <Link to="/about" className="nav-link">Rooms</Link>
+                  <Link to="/rooms" className="nav-link">Rooms</Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link to="/contact" className="nav-link">New Rooms</Link>
+                  <Link to="/rooms/new" className="nav-link">New Rooms</Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link to="/contact" className="nav-link">Reservation</Link>
+                  <Link to="/bookings" className="nav-link">Reservation</Link>
                 </li>
                 </Fragment>
           ) : null}

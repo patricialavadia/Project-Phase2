@@ -2,9 +2,9 @@ import React from 'react';
 
 function Home () {
   return (
-    <header className="home-cta">
-      <h1>Hotel Reservation</h1>
-    </header>
+        <div className="home-cta">
+          <h1>Home</h1>
+        </div>
   );
 };
 

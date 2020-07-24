@@ -28,7 +28,7 @@ const Logout = ({setUser}) => {
     })();
   }, []);
 
-  if (redirect) return (<Redirect to="/bookings"/>);
+  if (redirect) return (<Redirect to="/"/>);
   return null;
 };
 

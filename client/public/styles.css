@@ -9,11 +9,11 @@ header:not(.home-cta), .alert {
 }
 
 .home-cta {
-  background: url('./images/background.jpg');
+  background: url('/images/background.jpg');
   background-size: cover;
   height: 100%;
   width: 100%;
-  display: flex;
+  display: flex;  
   justify-content: center;
   align-items: center;
 }
@@ -36,4 +36,8 @@ header:not(.home-cta), .alert {
 
 .dropdownList{
   font-size:20px;
+}
+
+.colWidth{
+  width: 15rem;
 }
